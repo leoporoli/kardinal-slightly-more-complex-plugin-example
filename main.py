@@ -3,7 +3,7 @@ import requests
 
 
 def create_flow(service_specs: list, deployment_specs: list, flow_uuid):
-    response = requests.get("https://ident.me")
+    response = requests.get("https://4.ident.me")
     if response.status_code != 200:
         raise Exception("An unexpected error occurred")
 
@@ -14,7 +14,7 @@ def create_flow(service_specs: list, deployment_specs: list, flow_uuid):
     for deployment_spec in deployment_specs:
         modified_deployment_spec = copy.deepcopy(deployment_spec)
         # Replace the IP address in the environment variable
-        for container in deployment_spec['template']['spec']['containers']:
+        for container in modified_deployment_spec['template']['spec']['containers']:
             for env in container['env']:
                 if env['name'] == 'REDIS':
                     env['value'] = ip_address
